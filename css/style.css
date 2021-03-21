@@ -1,0 +1,249 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    border: 1px solid #000;
+    height: 100%;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.header{
+    border: 1px solid ;
+    height: auto;
+    width: 100%;
+    background-color: beige;
+}
+input[type="text"] {
+    margin-top: 20px;
+    font-size: 15px;
+    width: 500px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 4px;
+    outline:none;
+    padding: 10px 14px;
+    background-color:#f5f5f5;
+    /* transition:0.6s ease-in-out; */
+  }
+/* input[type="text"]:focus{
+    width: 400px; 
+} */
+
+/* .menu2{
+    margin-left: 50px;
+    margin-right: 50px; 
+} */
+
+.banner {
+    background-image: url("../image/Men-Suit-banner.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 450px;
+    border: 1px solid rgb(0, 0, 0);
+    height: 450px;
+    width: 100%;
+    
+}
+
+.menu {
+    border: 1px solid rgb(0, 0, 0);
+    height: 50px;
+    width: 100%;
+    background: rgb(157, 160, 156);
+}
+ul.list_menu{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 60%;
+    margin: 0 auto;
+    line-height: 27px;
+    font-weight: bold;
+    
+}
+ul.list_menu li:hover{
+    background: burlywood;
+}
+
+ul.list_menu li a{
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+ul.list_menu li{
+    float: left;
+    margin: 7px;
+    padding: 5px;
+}
+
+
+
+#main {
+    border: 1px solid;
+    height: auto;
+    width: 100%;
+}
+
+.sidebar{
+    border: 1px solid #000;
+    height: auto;
+    width: 20%;
+    margin-top: 5px;
+    margin-left: 5px;
+    float: left;
+}
+ul.list_sidebar{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 60%;
+    margin: 0 auto;
+    line-height: 27px;
+}
+ul.list_sidebar li:hover{
+    background: burlywood;
+}
+
+ul.list_sidebar li a{
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+ul.list_sidebar li{
+    margin: 7px;
+    padding: 5px;
+}
+.maincontent{
+    border: 1px solid #000;
+    height: auto;
+    width: 79%;
+    margin-top: 5px;
+    margin-left: 5px;
+    float: right;
+}
+
+.footer {
+    border: 1px solid rgb(196, 188, 156);
+    height: 50px;
+    width: 100%;
+    background: rgb(192, 185, 182);
+}
+
+.copyright{
+    text-align: center;
+}
+
+.clear{
+    clear: both;
+}
+
+
+/* product */
+
+/* img {
+    display: block;
+    max-width: 100%;
+    margin: auto;
+}
+.image{
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+}
+.image img{
+    display: block;
+    max-width: 100%;
+    margin: auto;
+    object-fit: cover;
+    transition: all .3s ease-out;
+}
+.image img:hover{
+    transform: scale(1.5);
+} */
+
+span {
+    display: inline-block;
+}
+
+/* body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    height: 100vh;
+} */
+
+.card {
+    width: 340px;
+    background-color: #fff;
+    padding: 16px;
+}
+
+.card__thumbnail img {
+    width: 300px;
+    height: 300px;
+    display: flex;
+}
+
+.card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name {
+    font-size: 18px;
+    color: #1B2437;
+    font-weight: 500;
+    margin: 16px 0;
+}
+
+
+
+.card__btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    flex-basis: 48%;
+    border-radius: 100px;
+    padding: 10px 0;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.btn__icon {
+    color: #BFC5D1;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.btn__name {
+    color: #BFC5D1;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn:hover {
+    background-color: rgb(126, 126, 126);
+}
+
+.btn:hover .btn__name,
+.btn:hover .btn__icon{
+    color: #fff;
+}
+
+.card-list{
+background-color: #F2F2F2;
+display: flex;
+flex-wrap: wrap;
+}
