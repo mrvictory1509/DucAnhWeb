@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'luxuryWeb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'shoes_db',
+        'NAME': 'vests_db',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on

@@ -17,8 +17,16 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.auth import login as auth_login
 from django.http import HttpResponse
 
-def index(request):
-    return render(request, 'index.html')
+def home(request):
+    return render(request, 'home.html')
+def products(request):
+    return render(request, 'products.html')
+def sales(request):
+    return render(request, 'sales.html')
+def contacts(request):
+    return render(request, 'contacts.html')
+def about_us(request):
+    return render(request, 'about_us.html')
 def sign_in(request):
     return render(request, 'sign_in.html')
 def sign_up(request):

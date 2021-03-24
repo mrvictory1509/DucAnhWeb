@@ -15,7 +15,7 @@
     <div class="wrapper">
         <div class="header">
 
-            <img src="image/logo vest.png" alt="" style="height: 78px;">
+            <img src="{% static 'image/logo vest.png' %}" alt="" style="height: 78px;">
             <input type="text" name="search" placeholder=" Search..." style="margin-left: 300px;">
 
             <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px">Cart</a>
@@ -36,11 +36,11 @@
         <div class="clear"></div>
         <div class="menu">
             <ul class="list_menu">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="index.php">Products</a> </li>
-                <li><a href="index.php">Sales</a> </li>
-                <li><a href="index.php">Contacts</a> </li>
-                <li><a href="index.php">About us</a> </li>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/products">Products</a> </li>
+                <li><a href="/sales">Sales</a> </li>
+                <li><a href="/contacts">Contacts</a> </li>
+                <li><a href="/about_us">About us</a> </li>
             </ul>
 
             <!-- <ul>
@@ -68,7 +68,7 @@
                     <div class="card margin">
                         
                         <div class="card__thumbnail image">
-                            <img src="image/1.jpeg" alt="">
+                            <img src="{% static 'image/1.jpeg' %}" alt="">
                         </div>
                         
 
