@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+{% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Index</title>
 </head>
@@ -12,17 +13,12 @@
     <div class="wrapper">
         <div class="header">
         
-            <img src="image/logo vest.png" alt="" style="height: 78px;">
+            <img src="{% static 'image/logo vest.png' %}" alt="" style="height: 78px;">
                 <input type="text" name="search" placeholder=" Search..." style="margin-left: 300px;">
             
                 <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px">Cart</a>
-                <a style="float: right; margin-left: 40px; margin-top:25px">Sign in</a>
-                <a style="float: right; margin-top:25px; ">Sign up</a>
-                
-
-
-
-        
+                <a style="float: right; margin-left: 40px; margin-top:25px" href="sign_in">Sign in</a>
+                <a style="float: right; margin-top:25px;" href="sign_up">Sign up</a>   
         </div>
         <div class="clear"></div>
         <div class="banner">
@@ -33,11 +29,11 @@
         <div class="clear"></div>
         <div class="menu">
             <ul class="list_menu">
-            <li><a href="index.php">Home</a></li>
-                <li><a href="index.php">Products</a> </li>
-                <li><a href="index.php">Sales</a> </li>
-                <li><a href="index.php">Contacts</a> </li>
-                <li><a href="index.php">About us</a> </li>
+            <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a> </li>
+                <li><a href="#">Sales</a> </li>
+                <li><a href="#">Contacts</a> </li>
+                <li><a href="#">About us</a> </li>
             </ul>
 
             <!-- <ul>
@@ -66,7 +62,7 @@
         <div class="card-list">
             <div class="card margin">
                 <div class="card__thumbnail image">
-                    <img src="image/1.jpeg"
+                    <img src="{% static 'image/1.jpeg' %}"
                         alt="">
                 </div>
 
@@ -85,7 +81,7 @@
             </div>
             <div class="card margin">
                 <div class="card__thumbnail image">
-                    <img src="image/2.jpeg"
+                    <img src="{% static 'image/2.jpeg' %}"
                         alt="">
                 </div>
 
@@ -104,7 +100,7 @@
             </div>
             <div class="card margin">
                 <div class="card__thumbnail image">
-                    <img src="image/3.jpeg"
+                    <img src="{% static 'image/3.jpeg' %}"
                         alt="">
                 </div>
 
