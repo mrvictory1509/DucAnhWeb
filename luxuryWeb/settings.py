@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'vests_db',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',  
         'PORT': '3306',
         'OPTIONS': {
             'sql_mode': 'traditional',
