@@ -1,3 +1,4 @@
+from Home.models import Vests, Category, Cart, Bill
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.db import connection
@@ -7,6 +8,8 @@ import string
 import random
 import pickle
 import os
+from django.db.models import F
+from Home.form import SignUpForm
 from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 from email.mime.text import MIMEText
@@ -18,11 +21,51 @@ from django.contrib.auth import login as auth_login
 from django.http import HttpResponse
 
 def home(request):
-    return render(request, 'home.html')
+    if request.user.is_authenticated:
+        trend = Vests.objects.all().order_by(F('NumberBuy').desc())[:6]
+        vests = {'trend' : trend, 'setToolbar':['home.html', request.user.username]}
+        return render(request, 'home.html', vests)
+    else:
+        trend = Vests.objects.all().order_by(F('NumberBuy').desc())[:6]
+        vests = {'trend' : trend, 'setToolbar':'home.html'}
+        return render(request, 'home.html', vests)
 def products(request):
-    return render(request, 'products.html')
+    if request.user.is_authenticated:
+        all = Vests.objects.all()
+        vests = {'all' : all, 'setToolbar':['products.html', request.user.username]}
+        return render(request, 'products.html', vests)
+    else:
+        all = Vests.objects.all()
+        vests = {'all' : all, 'setToolbar':'products.html'}
+        return render(request, 'products.html', vests)
 def sales(request):
-    return render(request, 'sales.html')
+    if request.user.is_authenticated:
+        sale = Vests.objects.filter(Sales = True)
+        vests = {'sale' : sale, 'setToolbar':['sales.html', request.user.username]}
+        return render(request, 'sales.html', vests)
+    else:
+        sale = Vests.objects.filter(Sales = True)
+        vests = {'sale' : sale, 'setToolbar':['sales.html']}
+        return render(request, 'sales.html', vests) 
+def vests(request):
+    if request.user.is_authenticated:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                " SELECT home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Vests'"
+            )
+            vest = cursor.fetchall()
+        # vest = Category.objects.filter(Name = 'Vests')
+        vests = {'vest' : vest, 'setToolbar':['sales.html', request.user.username]}
+        return render(request, 'sales.html', vests)
+    else:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                " SELECT home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Vests'"
+            )
+            vest = cursor.fetchall()
+        # vest = Category.objects.filter(Name = 'Vests')
+        vests = {'vest' : vest, 'setToolbar':'sales.html'}
+        return render(request, 'sales.html', vests)
 def contacts(request):
     return render(request, 'contacts.html')
 def about_us(request):
@@ -30,4 +73,15 @@ def about_us(request):
 def sign_in(request):
     return render(request, 'sign_in.html')
 def sign_up(request):
-    return render(request, 'sign_up.html')
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/home')
+    else:
+        form = SignUpForm()
+    return render(request, 'sign_up.html', {'form': form})

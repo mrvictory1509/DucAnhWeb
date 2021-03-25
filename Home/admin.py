@@ -1,3 +1,26 @@
 from django.contrib import admin
+from .models import Category, Vests, Cart, Bill
 
-# Register your models here.
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['Name', 'Description']
+    list_filter = ['Name']
+    search_fields = ['Name']
+admin.site.register(Category, CategoryAdmin)
+
+class VestsAdmin(admin.ModelAdmin):
+    list_display = ['Name', 'Price', 'CategoryID', 'NumberBuy', 'Made_in', 'Sales', 'New_Price', 'Image', 'Description']
+    list_filter = ['CategoryID']
+    search_fields = ['CategoryID']
+admin.site.register(Vests, VestsAdmin)
+
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['Name', 'VestsID', 'Quantity', 'UserID']
+    list_filter = ['Name']
+    search_fields = ['Name']
+admin.site.register(Cart, CartAdmin)
+
+class BillAdmin(admin.ModelAdmin):
+    list_display = ['Date', 'UserID', 'Image', 'Ship']
+    list_filter = ['UserID']
+    search_fields = ['UserID']
+admin.site.register(Bill, BillAdmin)
