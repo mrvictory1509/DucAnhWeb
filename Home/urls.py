@@ -15,10 +15,10 @@ urlpatterns = [
     path('Ties', views.Ties),
     path('View/<int:id>/', views.View),
     path('sales', views.sales),
-    path('contacts', views.contacts),
     path('about_us', views.about_us),
     path('sign_in', views.sign_in),
     path('sign_up', views.sign_up),
+    path('Cart', views.Cart),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

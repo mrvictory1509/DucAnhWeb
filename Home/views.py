@@ -158,8 +158,6 @@ def View(request, id):
         view = Vests.objects.filter(id = id)
         vests = {'view' : view, 'setToolbar':'product_detail.html'}
         return render(request, 'product_detail.html', vests)
-def contacts(request):
-    return render(request, 'contacts.html')
 def about_us(request):
     return render(request, 'about_us.html')
 def sign_in(request):
@@ -177,3 +175,8 @@ def sign_up(request):
     else:
         form = SignUpForm()
     return render(request, 'sign_up.html', {'form': form})
+def Cart(request):
+    if request.user.is_authenticated:
+        return render(request, 'shopping_Cart.html')
+    else:
+         return render(request, 'sign_in.html')

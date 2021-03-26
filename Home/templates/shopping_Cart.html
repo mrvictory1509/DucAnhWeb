@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="static/css/cart.css">
+<link rel="stylesheet" href="static/css/style.css">>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+        
+            <img src="image/logo vest.png" alt="" style="height: 78px;">
+                <input type="text" name="search" placeholder=" Search..." style="margin-left: 300px;">
+            
+                <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px">Cart</a>
+                <a style="float: right; margin-left: 40px; margin-top:25px">Sign in</a>
+                <a style="float: right; margin-top:25px; ">Sign up</a>
+                
+
+
+
+        
+        </div>
+        <div class="clear"></div>
+        <div class="banner">
+            <div>
+            <!-- <img src="image/Men-Suit-banner.jpg" alt=""> -->
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="menu">
+            <ul class="list_menu">
+            <li><a href="/home">Home(Top trending)</a></li>
+                <li><a href="/products">Products</a> </li>
+                <li><a href="/sales">Sales</a> </li>
+                <li><a href="/about_us">About us</a> </li>
+            </ul>
+            
+        </div>
+        <div class="clear"></div>
+        <div id="main">
+            <div class="sidebar">
+            <ul class="list_sidebar">
+                    <li><a href="/vests">Vests</a> </li>
+                    <li><a href="/Pants">Pants</a> </li>
+                    <li><a href="/Belts">Belts</a> </li>
+                    <li><a href="/Shoes">Shoes</a> </li>
+                    <li><a href="/Shirts">Shirts</a> </li>
+                    <li><a href="/Ties">Ties</a> </li>
+                </ul>
+            </div>
+            <div class="maincontent">
+            <div>
+                <div class="container mb-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"> </th>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Available</th>
+                                            <th scope="col" class="text-center">Quantity</th>
+                                            <th scope="col" class="text-right">Price</th>
+                                            <th> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                                            <td>Product Name Dada</td>
+                                            <td>In stock</td>
+                                            <td><input class="form-control" type="text" value="1" /></td>
+                                            <td class="text-right">124,90 €</td>
+                                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                                            <td>Product Name Toto</td>
+                                            <td>In stock</td>
+                                            <td><input class="form-control" type="text" value="1" /></td>
+                                            <td class="text-right">33,90 €</td>
+                                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                                            <td>Product Name Titi</td>
+                                            <td>In stock</td>
+                                            <td><input class="form-control" type="text" value="1" /></td>
+                                            <td class="text-right">70,00 €</td>
+                                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Sub-Total</td>
+                                            <td class="text-right">255,90 €</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Shipping</td>
+                                            <td class="text-right">6,90 €</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><strong>Total</strong></td>
+                                            <td class="text-right"><strong>346,90 €</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col mb-2">
+                            <div class="row">
+                                <div class="col-sm-12  col-md-6">
+                                    <button class="btn btn-block btn-light">Continue Shopping</button>
+                                </div>
+                                <div class="col-sm-12 col-md-6 text-right">
+                                    <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="clear"></div>
+        <div class="footer">
+            <div class="copyright">
+                Copyright by Duc anh
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+    
