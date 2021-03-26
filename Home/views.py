@@ -1,4 +1,4 @@
-from Home.models import Vests, Category, Cart, Bill
+from Home.models import Vests, Category, Cart, Bill, User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.db import connection
@@ -180,3 +180,22 @@ def Cart(request):
         return render(request, 'shopping_Cart.html')
     else:
          return render(request, 'sign_in.html')
+def add_Cart(request, id):
+    if request.user.is_authenticated:
+        lenCart = len(Cart.objects.filter(UserID_id= request.user.id, VestsID_id= id))
+        if lenCart > 0:
+            QTY = Cart.objects.filter(UserID_id= request.user.id, VestsID_id= id)[0].Quantity
+            Cart.objects.filter(UserID_id=request.user.id, VestsID_id= id).update(Quantity= QTY + 1)
+            response = HttpResponse()
+            response.writelines('Add to Cart successfully')
+            return response
+        else:
+            NameCart = request.user.username
+            Cart.objects.create(UserID_id= request.user.id, VestsID_id= id , Quantity= 1, Name= NameCart)
+            response = HttpResponse()
+            response.writelines('Add to Cart successfully')
+            return response    
+    else:
+        response = HttpResponse()
+        response.writelines('Login')
+        return response

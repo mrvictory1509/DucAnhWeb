@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Sales</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <img src="{% static 'image/logo vest.png' %}" alt="" style="height: 78px;">
+            <input type="text" name="search" placeholder=" Search..." style="margin-left: 300px;">
+
+            <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px" href="/Cart">Cart</a>
+            <a style="float: right; margin-left: 40px; margin-top:25px" href="sign_in">Sign in</a>
+            <a style="float: right; margin-top:25px;" href="sign_up">Sign up</a>
+        </div>
+        <div class="clear"></div>
+        <div class="banner">
+            <div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="menu">
+            <ul class="list_menu">
+                <li><a href="/home">Home(Top trending)</a></li>
+                <li><a href="/products">Products</a> </li>
+                <li><a href="/sales">Sales</a> </li>
+                <li><a href="/about_us">About us</a> </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+</body>
+
+</html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-{% load static %}
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,80 +10,42 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Sales</title>
 </head>
-<body>
-    <div class="wrapper">
-        <div class="header">
-            <img src="{% static 'image/logo vest.png' %}" alt="" style="height: 78px;">
-                <input type="text" name="search" placeholder=" Search..." style="margin-left: 300px;">
-            
-                <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px" href="/Cart">Cart</a>
-                <a style="float: right; margin-left: 40px; margin-top:25px" href="sign_in">Sign in</a>
-                <a style="float: right; margin-top:25px;" href="sign_up">Sign up</a>   
-        </div>
-        <div class="clear"></div>
-        <div class="banner">
-            <div>
-            <!-- <img src="image/Men-Suit-banner.jpg" alt=""> -->
-            </div>
-        </div>
-        <div class="clear"></div>
-        <div class="menu">
-            <ul class="list_menu">
-            <li><a href="/home">Home(Top trending)</a></li>
-                <li><a href="/products">Products</a> </li>
-                <li><a href="/sales">Sales</a> </li>
-                <li><a href="/about_us">About us</a> </li>
-            </ul>
 
-            <!-- <ul>
-            <li style="float: right;"><a href="index.php">Sign in</a> </li>
-                <li style="float: right;"><a href="index.php">Sign up</a> </li>
-                <li style="float: right;"><a href="index.php">Cart</a> </li>
-            </ul> -->
-            
-        </div>
-        <div class="clear"></div>
-        <div id="main">
-            <div class="sidebar">
-                <ul class="list_sidebar">
-                    <li><a href="/vests">Vests</a> </li>
-                    <li><a href="/Pants">Pants</a> </li>
-                    <li><a href="/Belts">Belts</a> </li>
-                    <li><a href="/Shoes">Shoes</a> </li>
-                    <li><a href="/Shirts">Shirts</a> </li>
-                    <li><a href="/Ties">Ties</a> </li>
-                </ul>
-            </div>
-            <div class="maincontent">
-                <div>
-                    <h1 class="text">Nike & Jordan shoe world!</h1>
-                    <div class="card-list">
-                        {% for i in trend %}
-                        <div class="card margin">
-                            <div class="card__thumbnail image">
-                                <img src="/media/{{i.Image}}" alt="">
-                            </div>
-                            <div class="card__info">
-                                <span class="name">{{i.Name}}</span>
-                                <span class="email" style="color:#e70d3c;">{{i.Price}} $</span>
-                            </div>
-                            <div class="card__btn">
+<body>
+    {% include "horizontal_toolbar.html" %}
+    <div id="main">
+        {% include "vertical_toolbar.html" %}
+        <div class="maincontent">
+            <div>
+                <h1 class="text">Nike & Jordan shoe world!</h1>
+                <div class="card-list">
+                    {% for i in trend %}
+                    <div class="card margin">
+                        <div class="card__thumbnail image">
+                            <img src="/media/{{i.Image}}" alt="">
+                        </div>
+                        <div class="card__info">
+                            <span class="name">{{i.Name}}</span>
+                            <span class="email" style="color:#e70d3c;">{{i.Price}} $</span>
+                        </div>
+                        <div class="card__btn">
                             <a href="/View/{{i.id}}" class="btn btn__view">
                                 <span class="btn__icon"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 <span class="btn__name">View</span>
                             </a>
-                                <img style="float: right;width: 35px; height: 35px; cursor: pointer;" src="{% static 'image/cart.png' %}" alt="" onclick="cart('{{i.id}}')">
-                            </div>
+                            <img style="float: right;width: 35px; height: 35px; cursor: pointer;" src="{% static 'image/cart.png' %}" alt="" onclick="cart('{{i.id}}')">
                         </div>
-                        {% endfor %}
                     </div>
-                    {% comment %} <div class="card-list">
+                    {% endfor %}
+                </div>
+                {% comment %}
+                <div class="card-list">
                     {% for i in sale %}
                     <div class="card-list">
                         <div class="card margin">
                             <div class="card__thumbnail image">
                                 <img src="/media/{{i.Image}}" alt="">
-                            </div>  
+                            </div>
                             <div class="card__info">
                                 <span class="name">{{i.Name}}</span>
                                 <span class="price">{{i.Price}} $</span>
@@ -92,22 +55,40 @@
                                     <span class="btn__icon"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     <span class="btn__name">View</span>
                                 </a>
-                            </div> 
-                        </div>
+                            </div>
                         </div>
                     </div>
-                    {% endfor %}
-                    </div> {% endcomment %}
                 </div>
-            </div>
-        </div>
-        <div class="clear"></div>
-        <div class="footer">
-            <div class="copyright">
-                Copyright by Duc anh
-            </div>
+                {% endfor %}
+            </div> {% endcomment %}
         </div>
     </div>
-    
+    </div>
+    <div class="clear"></div>
+    <div class="footer">
+        <div class="copyright">
+            Copyright by Duc anh
+        </div>
+    </div>
+    </div>
+
 </body>
+
 </html>
+<script>
+    function cart(id) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText == "Login") {
+                    location.href = "/sign_in";
+                }
+                if (this.responseText == "Add to Cart successfully") {
+                    alert("Add to Cart successfully");
+                }
+            }
+        };
+        xhttp.open("GET", "/add_Cart/" + id, true);
+        xhttp.send();
+    }
+</script>
