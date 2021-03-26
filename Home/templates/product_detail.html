@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+{% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Detail</title>
 </head>
 
 <body>
@@ -21,11 +21,6 @@
             <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px">Cart</a>
             <a style="float: right; margin-left: 40px; margin-top:25px">Sign in</a>
             <a style="float: right; margin-top:25px; ">Sign up</a>
-
-
-
-
-
         </div>
         <div class="clear"></div>
         <div class="banner">
@@ -43,24 +38,17 @@
                 <li><a href="/about_us">About us</a> </li>
             </ul>
 
-            <!-- <ul>
-            <li style="float: right;"><a href="index.php">Sign in</a> </li>
-                <li style="float: right;"><a href="index.php">Sign up</a> </li>
-                <li style="float: right;"><a href="index.php">Cart</a> </li>
-            </ul> -->
-
         </div>
         <div class="clear"></div>
         <div id="main">
             <div class="sidebar">
                 <ul class="list_sidebar">
-                    <li><a href="index.php">Vests</a> </li>
-                    <li><a href="index.php">Pants</a> </li>
-                    <li><a href="index.php">Belts</a> </li>
-                    <li><a href="index.php">Shoes</a> </li>
-                    <li><a href="index.php">Shirts</a> </li>
-                    <li><a href="index.php">Ties</a> </li>
-
+                    <li><a href="/vests">Vests</a> </li>
+                    <li><a href="/Pants">Pants</a> </li>
+                    <li><a href="/Belts">Belts</a> </li>
+                    <li><a href="/Shoes">Shoes</a> </li>
+                    <li><a href="/Shirts">Shirts</a> </li>
+                    <li><a href="/Ties">Ties</a> </li>
                 </ul>
             </div>
             <div class="maincontent">
@@ -68,21 +56,18 @@
                     <div class="card margin">
                         
                         <div class="card__thumbnail image">
-                            <img src="{% static 'image/1.jpeg' %}" alt="">
+                            <img src="/media/{{view.0.Image}}" alt="">
                         </div>
-                        
-
                         <div class="card__info">
-                            <span class="name">Vest</span>
-                            <span class="email">7,349,000₫</span>
+                            <span class="name">{{view.0.Name}}</span>
+                            <span class="email">{{view.0.Price}} $</span>
                         </div>
-                        
-
                         <div class="card__btn">
-                            <a href="detail1.html" class="btn btn__view" style="text-decoration: none;">
+                            <a href="/cart" class="btn btn__view" style="text-decoration: none;">
                                 <span class="btn__icon"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 <span class="btn__name">Add cart</span>
                             </a>
+                            <img style="float: right;width: 35px; height: 35px; cursor: pointer;" src="{% static 'image/cart.png' %}" alt="" onclick="cart('{{view.0.id}}')">
                         </div>
                         
                     </div>
