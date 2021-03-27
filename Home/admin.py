@@ -14,9 +14,9 @@ class VestsAdmin(admin.ModelAdmin):
 admin.site.register(Vests, VestsAdmin)
 
 class CartAdmin(admin.ModelAdmin):
-    list_display = ['Name', 'VestsID', 'Quantity', 'UserID']
-    list_filter = ['Name']
-    search_fields = ['Name']
+    list_display = ['VestsID', 'Quantity', 'UserID']
+    list_filter = ['VestsID']
+    search_fields = ['VestsID']
 admin.site.register(Cart, CartAdmin)
 
 class BillAdmin(admin.ModelAdmin):

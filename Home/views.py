@@ -170,11 +170,12 @@ def sign_up(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            login(request, user)
+            auth_login(request, user)
             return redirect('/home')
     else:
         form = SignUpForm()
     return render(request, 'sign_up.html', {'form': form})
+<<<<<<< Updated upstream
 def Cart(request):
     if request.user.is_authenticated:
         return render(request, 'shopping_Cart.html')
@@ -199,3 +200,35 @@ def add_Cart(request, id):
         response = HttpResponse()
         response.writelines('Login')
         return response
+=======
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('/home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username','')
+            password = request.POST.get('password','')
+            user = authenticate(username=username, password=password)
+            if(user is not None):
+                request.session.set_expiry(86400)
+                auth_login(request, user)
+                return redirect('/home')
+            else:
+                return render(request, 'sign_in.html', {'error':'Account or password is incorrect'})
+        else:
+            return redirect('/sign_in')
+def logout(request):
+    django_logout(request)
+    return redirect('/home')
+def addCart(request, id):
+    if request.user.is_authenticated:
+        if len(Cart.objects.filter(UserID_id = request.user.id,VestsID_id = id)) == 0:
+            Cart.objects.create(UserID_id = request.user.id,VestsID_id = id, Quantity = 1)
+            return HttpResponse("Add to card successfully")
+        else:
+            Quantity = Cart.objects.filter(UserID_id = request.user.id,VestsID_id = id)[0].Quantity
+            Cart.objects.filter(UserID_id = request.user.id,VestsID_id = id).update(Quantity = Quantity + 1)
+            return HttpResponse("Add to card successfully")
+    else:
+        return HttpResponse("Login")
+>>>>>>> Stashed changes

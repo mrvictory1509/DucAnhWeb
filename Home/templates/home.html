@@ -12,6 +12,7 @@
 </head>
 
 <body>
+<<<<<<< Updated upstream
     {% include "horizontal_toolbar.html" %}
     <div id="main">
         {% include "vertical_toolbar.html" %}
@@ -29,6 +30,44 @@
                             <span class="email" style="color:#e70d3c;">{{i.Price}} $</span>
                         </div>
                         <div class="card__btn">
+=======
+    <div class="wrapper">
+            {% include 'header.html' %}
+        <div class="clear"></div>
+        <div class="banner">
+            <div>
+            <!-- <img src="image/Men-Suit-banner.jpg" alt=""> -->
+            </div>
+        </div>
+        <div class="clear"></div>
+        {% include 'menu.html' %}
+        <div class="clear"></div>
+        <div id="main">
+            <div class="sidebar">
+                <ul class="list_sidebar">
+                    <li><a href="/vests">Vests</a> </li>
+                    <li><a href="/Pants">Pants</a> </li>
+                    <li><a href="/Belts">Belts</a> </li>
+                    <li><a href="/Shoes">Shoes</a> </li>
+                    <li><a href="/Shirts">Shirts</a> </li>
+                    <li><a href="/Ties">Ties</a> </li>
+                </ul>
+            </div>
+            <div class="maincontent">
+                <div>
+                    <h1 class="text">Nike & Jordan shoe world!</h1>
+                    <div class="card-list">
+                        {% for i in trend %}
+                        <div class="card margin">
+                            <div class="card__thumbnail image">
+                                <img src="/media/{{i.Image}}"alt="">
+                            </div>
+                            <div class="card__info">
+                                <span class="name">{{i.Name}}</span>
+                                <span class="email" style="color:#e70d3c;">{{i.Price}} $</span>
+                            </div>
+                            <div class="card__btn">
+>>>>>>> Stashed changes
                             <a href="/View/{{i.id}}" class="btn btn__view">
                                 <span class="btn__icon"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 <span class="btn__name">View</span>
@@ -73,6 +112,7 @@
     </div>
 
 </body>
+<<<<<<< Updated upstream
 
 </html>
 <script>
@@ -92,3 +132,7 @@
         xhttp.send();
     }
 </script>
+=======
+<script src="{% static 'js/addCart.js' %}" type="text/javascript" charset="utf-8" async defer></script>
+</html>
+>>>>>>> Stashed changes

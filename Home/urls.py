@@ -18,8 +18,14 @@ urlpatterns = [
     path('about_us', views.about_us),
     path('sign_in', views.sign_in),
     path('sign_up', views.sign_up),
+<<<<<<< Updated upstream
     path('Cart', views.Cart),
     path('add_Cart/<int:id>/', views.add_Cart),
+=======
+    path('login', views.login),
+    path('logout', views.logout),
+    path('addCart/<int:id>', views.addCart),
+>>>>>>> Stashed changes
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

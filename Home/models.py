@@ -18,7 +18,6 @@ class Vests(models.Model):
     def __str__(self):
         return self.Name
 class Cart(models.Model):
-    Name = models.CharField(max_length=30)
     VestsID = models.ForeignKey(Vests, default=None, on_delete=models.CASCADE, blank=True, null = True)
     Quantity = models.IntegerField(blank=True, null = True)
     UserID = models.ForeignKey(User, default=None, on_delete=models.CASCADE, blank=True, null = True)
