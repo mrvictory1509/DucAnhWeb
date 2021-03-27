@@ -1,4 +1,4 @@
-from Home.models import Vests, Category, Cart, Bill, User
+from Home.models import Vests, Category, CartUser, Bill, User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.db import connection
@@ -23,11 +23,11 @@ from django.http import HttpResponse
 def home(request):
     if request.user.is_authenticated:
         trend = Vests.objects.all().order_by(F('NumberBuy').desc())[:6]
-        vests = {'trend' : trend, 'setToolbar':['home.html', request.user.username]}
+        vests = {'trend' : trend, 'setToolbar': request.user.username}
         return render(request, 'home.html', vests)
     else:
         trend = Vests.objects.all().order_by(F('NumberBuy').desc())[:6]
-        vests = {'trend' : trend, 'setToolbar':'home.html'}
+        vests = {'trend' : trend, 'setToolbar': request.user.username}
         return render(request, 'home.html', vests)
 def products(request):
     if request.user.is_authenticated:
@@ -175,7 +175,6 @@ def sign_up(request):
     else:
         form = SignUpForm()
     return render(request, 'sign_up.html', {'form': form})
-<<<<<<< Updated upstream
 def Cart(request):
     if request.user.is_authenticated:
         return render(request, 'shopping_Cart.html')
@@ -200,7 +199,6 @@ def add_Cart(request, id):
         response = HttpResponse()
         response.writelines('Login')
         return response
-=======
 def login(request):
     if request.user.is_authenticated:
         return redirect('/home')
@@ -222,13 +220,12 @@ def logout(request):
     return redirect('/home')
 def addCart(request, id):
     if request.user.is_authenticated:
-        if len(Cart.objects.filter(UserID_id = request.user.id,VestsID_id = id)) == 0:
-            Cart.objects.create(UserID_id = request.user.id,VestsID_id = id, Quantity = 1)
+        if len(CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id)) == 0:
+            CartUser.objects.create(UserID_id = request.user.id,VestsID_id = id, Quantity = 1)
             return HttpResponse("Add to card successfully")
         else:
-            Quantity = Cart.objects.filter(UserID_id = request.user.id,VestsID_id = id)[0].Quantity
-            Cart.objects.filter(UserID_id = request.user.id,VestsID_id = id).update(Quantity = Quantity + 1)
+            Quantity = CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id)[0].Quantity
+            CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id).update(Quantity = Quantity + 1)
             return HttpResponse("Add to card successfully")
     else:
         return HttpResponse("Login")
->>>>>>> Stashed changes

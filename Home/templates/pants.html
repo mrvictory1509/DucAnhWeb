@@ -52,20 +52,4 @@
 </body>
 
 </html>
-<script>
-    function cart(id) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText == "Login") {
-                    location.href = "/sign_in";
-                }
-                if (this.responseText == "Add to Cart successfully") {
-                    alert("Add to Cart successfully");
-                }
-            }
-        };
-        xhttp.open("GET", "/add_Cart/" + id, true);
-        xhttp.send();
-    }
-</script>
+<script src="{% static 'js/addCart.js' %}" type="text/javascript" charset="utf-8" async defer></script>

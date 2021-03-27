@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Vests, Cart, Bill
+from .models import Category, Vests, CartUser, Bill
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['Name', 'Description']
@@ -17,7 +17,7 @@ class CartAdmin(admin.ModelAdmin):
     list_display = ['VestsID', 'Quantity', 'UserID']
     list_filter = ['VestsID']
     search_fields = ['VestsID']
-admin.site.register(Cart, CartAdmin)
+admin.site.register(CartUser, CartAdmin)
 
 class BillAdmin(admin.ModelAdmin):
     list_display = ['Date', 'UserID', 'Image', 'Ship']

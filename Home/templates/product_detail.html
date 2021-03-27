@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< Updated upstream
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Detail</title>
@@ -22,60 +21,6 @@
 
                     <div class="card__thumbnail image">
                         <img src="/media/{{view.0.Image}}" alt="">
-=======
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Document</title>
-</head>
-
-<body>
-    <div class="wrapper">
-{% include 'header.html' %}
-        <div class="clear"></div>
-        <div class="banner">
-            <div>
-                <!-- <img src="image/Men-Suit-banner.jpg" alt=""> -->
-            </div>
-        </div>
-        <div class="clear"></div>
-        {% include 'menu.html' %}
-        <div class="clear"></div>
-        <div id="main">
-            <div class="sidebar">
-                <ul class="list_sidebar">
-                    <li><a href="index.php">Vests</a> </li>
-                    <li><a href="index.php">Pants</a> </li>
-                    <li><a href="index.php">Belts</a> </li>
-                    <li><a href="index.php">Shoes</a> </li>
-                    <li><a href="index.php">Shirts</a> </li>
-                    <li><a href="index.php">Ties</a> </li>
-
-                </ul>
-            </div>
-            <div class="maincontent">
-                <div class="card-list">
-                    <div class="card margin">
-                        
-                        <div class="card__thumbnail image">
-                            <img src="{% static 'image/1.jpeg' %}" alt="">
-                        </div>
-                        
-
-                        <div class="card__info">
-                            <span class="name">Vest</span>
-                            <span class="email">7,349,000₫</span>
-                        </div>
-                        
-
-                        <div class="card__btn">
-                            <a href="detail1.html" class="btn btn__view" style="text-decoration: none;">
-                                <span class="btn__icon"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                                <span class="btn__name">Add cart</span>
-                            </a>
-                        </div>
-                        
->>>>>>> Stashed changes
                     </div>
                     <div class="card__info">
                         <span class="name">{{view.0.Name}}</span>
@@ -102,7 +47,6 @@
 
             </div>
 
-<<<<<<< Updated upstream
             <div class="clear"></div>
             <div class="footer">
                 <div class="copyright">
@@ -110,28 +54,10 @@
                 </div>
             </div>
         </div>
+    </body>
+
+    </html>
+<script src="{% static 'js/addCart.js' %}" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 
 </html>
-<script>
-    function cart(id) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText == "Login") {
-                    location.href = "/sign_in";
-                }
-                if (this.responseText == "Add to Cart successfully") {
-                    alert("Add to Cart successfully");
-                }
-            }
-        };
-        xhttp.open("GET", "/add_Cart/" + id, true);
-        xhttp.send();
-    }
-</script>
-=======
-        </body>
-
-        </html>
->>>>>>> Stashed changes

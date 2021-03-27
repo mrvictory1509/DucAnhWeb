@@ -17,7 +17,7 @@ class Vests(models.Model):
     Description = models.TextField(blank=True, null = True)
     def __str__(self):
         return self.Name
-class Cart(models.Model):
+class CartUser(models.Model):
     VestsID = models.ForeignKey(Vests, default=None, on_delete=models.CASCADE, blank=True, null = True)
     Quantity = models.IntegerField(blank=True, null = True)
     UserID = models.ForeignKey(User, default=None, on_delete=models.CASCADE, blank=True, null = True)
