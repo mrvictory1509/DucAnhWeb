@@ -177,28 +177,15 @@ def sign_up(request):
     return render(request, 'sign_up.html', {'form': form})
 def Cart(request):
     if request.user.is_authenticated:
-        return render(request, 'shopping_Cart.html')
+        with connection.cursor() as cursor:
+            cursor.execute(
+                " SELECT home_vests.Name, home_vests.Image, home_vests.Price, home_cartuser.Quantity FROM home_vests INNER JOIN home_cartuser ON home_vests.id = home_cartuser.UserID_id INNER JOIN auth_user ON auth_user.id = home_cartuser.UserID_id WHERE auth_user.id = '%s'",
+                [request.user.id]
+            )
+            viewCart = cursor.fetchall()
+        return render(request, 'shopping_Cart.html', {"viewCart":viewCart})
     else:
          return render(request, 'sign_in.html')
-def add_Cart(request, id):
-    if request.user.is_authenticated:
-        lenCart = len(Cart.objects.filter(UserID_id= request.user.id, VestsID_id= id))
-        if lenCart > 0:
-            QTY = Cart.objects.filter(UserID_id= request.user.id, VestsID_id= id)[0].Quantity
-            Cart.objects.filter(UserID_id=request.user.id, VestsID_id= id).update(Quantity= QTY + 1)
-            response = HttpResponse()
-            response.writelines('Add to Cart successfully')
-            return response
-        else:
-            NameCart = request.user.username
-            Cart.objects.create(UserID_id= request.user.id, VestsID_id= id , Quantity= 1, Name= NameCart)
-            response = HttpResponse()
-            response.writelines('Add to Cart successfully')
-            return response    
-    else:
-        response = HttpResponse()
-        response.writelines('Login')
-        return response
 def login(request):
     if request.user.is_authenticated:
         return redirect('/home')
