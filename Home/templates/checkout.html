@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+</head>
+<body>
+	<div class="container" id="photo">
+		<div class="row">
+			<div class="col-12">
+				<label for="exampleInputEmail1">Full name of recipient</label>
+				<input type="text" class="form-control" id="name">
+				<p id="validateName" style="display: none; color: red;">Your name must be greater than 5 characters</p>
+			</div>
+			<div class="col-12">
+				<label for="exampleInputEmail1">Address</label>
+				<input type="text" class="form-control" id="Address">
+				<p id="validateAddress" style="display: none; color: red;">Your address must be greater than 5 characters</p>
+			</div>
+			<div class="col-12">
+				<label for="exampleInputEmail1">Phone number</label>
+				<input type="text" class="form-control" id="Phone">
+				<p id="validatePhone" style="display: none; color: red;">Your phone must be greater than 5 characters</p>
+			</div>
+			<div class="col-12">
+				<label for="exampleInputEmail1">Email</label>
+				<input type="email" class="form-control" id="Email">
+				<p id="validateEmail" style="display: none; color: red;">Your email must be greater than 5 characters</p>
+			</div>
+			<div class="col-12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col"> </th>
+							<th scope="col">Product</th>
+							<th scope="col">Available</th>
+							<th scope="col" class="text-center">Quantity</th>
+							<th scope="col" class="text-right">Price</th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							{% for i in viewCart %}
+							<td><img src="media/{{i.1}}" style="width: 20%; height: auto;" /> </td>
+							<td>{{i.0}}</td>
+							<td>In stock</td>
+							<td><input class="form-control Quanlity" type="text" value="{{i.3}}" onkeyup="Total('{{i.4}}')" id="Total{{i.4}}" /></td>
+							<td class="text-right price">{{i.2}} €</td>
+							<td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+							{%endfor%}
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Sub-Total</td>
+							<td class="text-right" id="subTotal"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Shipping</td>
+							<td class="text-right">6,90 €</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><strong>Total</strong></td>
+							<td class="text-right" id="Total"><strong>346,90 €</strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12" id="image" style="display: none;"></div>
+			<div class="col-12" style="text-align: center;">
+				<form action="/setBill" method="POST" accept-charset="utf-8">
+					{% csrf_token %}
+					<input type="" name="ImageBill" id="base64Image" style="display: none;">
+					<button type="submit" class="btn btn-primary" style="display: none;" id="buyNow">Buy now</button>
+					<button type="button" class="btn btn-primary" onclick="buy()" style="display: none;" id="takeImage">Buy now</button>
+				</form>
+			</div>
+			<div class="col-12" style="text-align: center;">
+				<button type="button" class="btn btn-primary" onclick="validateInput()" id="confirm">Confirm information</button>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	subTotal();
+	function subTotal()
+	{
+		price = document.getElementsByClassName("price")
+		Quanlity = document.getElementsByClassName("Quanlity")
+		var totalPrice = 0;
+		for (var i = 0; i < price.length; i++) {
+			totalPrice = totalPrice + parseInt(price[i].innerHTML)*parseInt(Quanlity[i].value);
+		}
+		document.getElementById('subTotal').innerHTML = totalPrice + " "+"€"
+		document.getElementById('Total').innerHTML = totalPrice +  6.9 +" "+"€"
+	}  
+	function Total(id)
+	{
+		subTotal();
+		setQuanlity = document.getElementById("Total"+id).value;
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				if(this.responseText == "Login")
+				{
+					location.href = "/sign_in"
+				}
+			}
+		};
+		xhttp.open("GET", "/setQuality/"+id+"/"+setQuanlity, true);
+		xhttp.send();
+	}
+	function checkout()
+	{
+		location.href = "/checkout"
+	}
+	function validateInput()
+	{
+		var checkInput = 0;
+		if($('#name').val().length <= 5)
+		{
+			$('#validateName').show()
+			checkInput++;
+		}
+		if($('#name').val().length > 5)
+		{
+			$('#validateName').hide();
+			checkInput = 0;
+		}
+
+		if($('#Address').val().length <= 5)
+		{
+			$('#validateAddress').show()
+			checkInput++;
+		}
+		if($('#Address').val().length > 5)
+		{
+			$('#validateAddress').hide()
+			checkInput = 0;
+		}
+
+		if($('#Phone').val().length <= 5)
+		{
+			$('#validatePhone').show();
+			checkInput++;
+		}
+		if($('#Phone').val().length > 5)
+		{
+			$('#validatePhone').hide()
+			checkInput = 0;
+		}
+
+		if($('#Email').val().length <= 5)
+		{
+			$('#validateEmail').show();
+			checkInput++;
+		}
+		if($('#Email').val().length > 5)
+		{
+			$('#validateEmail').hide()
+			checkInput = 0;
+		}
+		if (checkInput == 0) 
+		{
+			var element = $("#photo");
+			var getCanvas;
+			html2canvas(element, {
+				onrendered: function (canvas) {
+					$("#image").append(canvas);
+					getCanvas = canvas;
+				}
+			});
+			$('#takeImage').show();
+			$('#confirm').hide();
+		}
+	}
+	function buy()
+	{
+		var img = document.getElementById('image');
+		img = img.getElementsByTagName("canvas")[0].toDataURL()
+		document.getElementById('base64Image').value = img;
+		document.getElementById("buyNow").click();
+	}
+</script>
+</html>

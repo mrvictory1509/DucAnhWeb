@@ -43,7 +43,7 @@
                                             <td><img src="media/{{i.1}}" style="width: 20%; height: auto;" /> </td>
                                             <td>{{i.0}}</td>
                                             <td>In stock</td>
-                                            <td><input class="form-control Quanlity" type="text" value="{{i.3}}" onkeyup="Total()"/></td>
+                                            <td><input class="form-control Quanlity" type="text" value="{{i.3}}" onkeyup="Total('{{i.4}}')" id="Total{{i.4}}" /></td>
                                             <td class="text-right price">{{i.2}} €</td>
                                             <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
                                             {%endfor%}
@@ -82,7 +82,7 @@
                                     <button class="btn btn-block btn-light">Continue Shopping</button>
                                 </div>
                                 <div class="col-sm-12 col-md-6 text-right">
-                                    <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                                    <button class="btn btn-lg btn-block btn-success text-uppercase" onclick="checkout()">Checkout</button>
                                 </div>
                             </div>
                         </div>
@@ -98,23 +98,39 @@
             </div>
         </div>
 
-</body>
-<script>
-    subTotal();
-    function subTotal()
-    {
-        price = document.getElementsByClassName("price")
-        Quanlity = document.getElementsByClassName("Quanlity")
-        var totalPrice = 0;
-        for (var i = 0; i < price.length; i++) {
-            totalPrice = totalPrice + parseInt(price[i].innerHTML)*parseInt(Quanlity[i].value);
-        }
-        document.getElementById('subTotal').innerHTML = totalPrice + " "+"€"
-        document.getElementById('Total').innerHTML = totalPrice +  6.9 +" "+"€"
-    }  
-    function Total()
-    {
+    </body>
+    <script>
         subTotal();
-    }
-</script>
-</html>
+        function subTotal()
+        {
+            price = document.getElementsByClassName("price")
+            Quanlity = document.getElementsByClassName("Quanlity")
+            var totalPrice = 0;
+            for (var i = 0; i < price.length; i++) {
+                totalPrice = totalPrice + parseInt(price[i].innerHTML)*parseInt(Quanlity[i].value);
+            }
+            document.getElementById('subTotal').innerHTML = totalPrice + " "+"€"
+            document.getElementById('Total').innerHTML = totalPrice +  6.9 +" "+"€"
+        }  
+        function Total(id)
+        {
+            subTotal();
+            setQuanlity = document.getElementById("Total"+id).value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    if(this.responseText == "Login")
+                    {
+                        location.href = "/sign_in"
+                    }
+                }
+            };
+            xhttp.open("GET", "/setQuality/"+id+"/"+setQuanlity, true);
+            xhttp.send();
+        }
+        function checkout()
+        {
+            location.href = "/checkout"
+        }
+    </script>
+    </html>
