@@ -215,6 +215,7 @@ def addCart(request, id):
             Quantity = CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id)[0].Quantity
             CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id).update(Quantity = Quantity + 1)
             return HttpResponse("Add to card successfully")
+        print('aaaaaaaa')
     else:
         return HttpResponse("Login")
 def setQuality(request, CartID, Quanlity):
