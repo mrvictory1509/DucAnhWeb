@@ -1,4 +1,4 @@
-from Home.models import Vests, Category, CartUser, Bill, User
+from .models import Vests, Category, CartUser, BillUser, User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.db import connection
@@ -9,7 +9,7 @@ import random
 import pickle
 import os
 from django.db.models import F
-from Home.form import SignUpForm
+from .form import SignUpForm
 from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 from email.mime.text import MIMEText
@@ -19,6 +19,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth import login as auth_login
 from django.http import HttpResponse
+from django.core.files.base import ContentFile
 
 def home(request):
     if request.user.is_authenticated:
@@ -179,7 +180,7 @@ def Cart(request):
     if request.user.is_authenticated:
         with connection.cursor() as cursor:
             cursor.execute(
-                " SELECT home_vests.Name, home_vests.Image, home_vests.Price, home_cartuser.Quantity FROM home_vests INNER JOIN home_cartuser ON home_vests.id = home_cartuser.UserID_id INNER JOIN auth_user ON auth_user.id = home_cartuser.UserID_id WHERE auth_user.id = '%s'",
+                " SELECT home_vests.Name, home_vests.Image, home_vests.Price, home_cartuser.Quantity, home_cartuser.id FROM home_vests INNER JOIN home_cartuser ON home_vests.id = home_cartuser.UserID_id INNER JOIN auth_user ON auth_user.id = home_cartuser.UserID_id WHERE auth_user.id = '%s'",
                 [request.user.id]
             )
             viewCart = cursor.fetchall()
@@ -216,3 +217,36 @@ def addCart(request, id):
             return HttpResponse("Add to card successfully")
     else:
         return HttpResponse("Login")
+def setQuality(request, CartID, Quanlity):
+    if request.user.is_authenticated:
+        CartUser.objects.filter(id = CartID).update(Quantity = Quanlity)
+        return HttpResponse("Successfully")
+    else:
+        return HttpResponse("Login")
+def checkout(request):
+    if request.user.is_authenticated:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                " SELECT home_vests.Name, home_vests.Image, home_vests.Price, home_cartuser.Quantity, home_cartuser.id FROM home_vests INNER JOIN home_cartuser ON home_vests.id = home_cartuser.UserID_id INNER JOIN auth_user ON auth_user.id = home_cartuser.UserID_id WHERE auth_user.id = '%s'",
+                [request.user.id]
+            )
+            viewCart = cursor.fetchall()
+        return render(request, 'checkout.html', {"viewCart":viewCart})
+    else:
+        return HttpResponse("Login")
+def setBill(request):
+    if request.user.is_authenticated:
+        bill = request.POST.get('ImageBill')
+        format, imgstr = bill.split(';base64,') 
+        ext = format.split('/')[-1]
+        data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+        BillUser.objects.create(UserID_id =request.user.id, Ship = False, Image = data)
+        return redirect('/home')
+    else:
+        return redirect('/sign_in')
+def yourOrder(request):
+    if request.user.is_authenticated:
+        bill = BillUser.objects.filter(UserID_id =request.user.id).order_by('-Date')
+        return render(request, 'yourOrder.html', {'bill':bill})
+    else:
+        return redirect('/sign_in')

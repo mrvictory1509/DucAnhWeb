@@ -22,6 +22,10 @@ urlpatterns = [
     path('login', views.login),
     path('logout', views.logout),
     path('addCart/<int:id>', views.addCart),
+    path('setQuality/<int:CartID>/<int:Quanlity>/', views.setQuality),
+    path('checkout', views.checkout),
+    path('setBill', views.setBill),
+    path('yourOrder', views.yourOrder),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

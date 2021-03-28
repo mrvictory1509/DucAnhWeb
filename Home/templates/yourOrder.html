@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+</head>
+<body>
+	{% include "horizontal_toolbar.html" %}
+	<div class="container">
+		<div class="row">
+			<div class="col-6" style="text-align: center;">
+				Date of purchase
+			</div>
+			<div class="col-6" style="text-align: center;">
+				Status
+			</div>
+		</div>
+		<div class="row">
+			{% for i in bill %}
+			<div class="col-12">
+				<hr style="width: 100%;">
+			</div>
+			<div class="col-6">
+				<a href="media/{{i.Image}}" title="">{{i.Date}}</a>
+			</div>
+			<div class="col-6" style="text-align: center;">
+				{% if i.Ship == True %}
+				<input type="checkbox" name="" checked style="width: 20px; height: 20px;"> 
+				{% endif %}
+				{% if i.Ship == False %}
+				<input type="checkbox" name="" style="width: 20px; height: 20px;"> 
+				{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+</html>
