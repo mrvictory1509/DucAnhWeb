@@ -32,20 +32,20 @@ def home(request):
 def products(request):
     if request.user.is_authenticated:
         all = Vests.objects.all()
-        vests = {'all' : all, 'setToolbar':['products.html', request.user.username]}
+        vests = {'all' : all, 'setToolbar': request.user.username}
         return render(request, 'products.html', vests)
     else:
         all = Vests.objects.all()
-        vests = {'all' : all, 'setToolbar':'products.html'}
+        vests = {'all' : all, 'setToolbar': request.user.username}
         return render(request, 'products.html', vests)
 def sales(request):
     if request.user.is_authenticated:
         sale = Vests.objects.filter(Sales = True)
-        vests = {'sale' : sale, 'setToolbar':['sales.html', request.user.username]}
+        vests = {'sale' : sale, 'setToolbar': request.user.username}
         return render(request, 'sales.html', vests)
     else:
         sale = Vests.objects.filter(Sales = True)
-        vests = {'sale' : sale, 'setToolbar':['sales.html']}
+        vests = {'sale' : sale, 'setToolbar': request.user.username}
         return render(request, 'sales.html', vests) 
 def vests(request):
     if request.user.is_authenticated:
@@ -54,7 +54,7 @@ def vests(request):
                 " SELECT home_vests.id, home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price, home_vests.Image FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Vests'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':['vests.html', request.user.username]}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'vests.html', vests)
     else:
         with connection.cursor() as cursor:
@@ -62,7 +62,7 @@ def vests(request):
                 " SELECT home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Vests'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':'vests.html'}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'vests.html', vests)
 def Pants(request):
     if request.user.is_authenticated:
@@ -71,7 +71,7 @@ def Pants(request):
                 " SELECT home_vests.id, home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price, home_vests.Image FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Pants'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':['Pants.html', request.user.username]}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Pants.html', vests)
     else:
         with connection.cursor() as cursor:
@@ -79,7 +79,7 @@ def Pants(request):
                 " SELECT home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Pants'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':'Pants.html'}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Pants.html', vests)
 def Belts(request):
     if request.user.is_authenticated:
@@ -88,7 +88,7 @@ def Belts(request):
                 " SELECT home_vests.id, home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price, home_vests.Image FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Belts'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':['Belts.html', request.user.username]}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Belts.html', vests)
     else:
         with connection.cursor() as cursor:
@@ -96,7 +96,7 @@ def Belts(request):
                 " SELECT home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Belts'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':'Belts.html'}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Belts.html', vests)
 def Shoes(request):
     if request.user.is_authenticated:
@@ -105,7 +105,7 @@ def Shoes(request):
                 " SELECT home_vests.id, home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price, home_vests.Image FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Shoes'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':['Shoes.html', request.user.username]}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Shoes.html', vests)
     else:
         with connection.cursor() as cursor:
@@ -113,7 +113,7 @@ def Shoes(request):
                 " SELECT home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Shoes'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':'Shoes.html'}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Shoes.html', vests)
 def Shirts(request):
     if request.user.is_authenticated:
@@ -122,7 +122,7 @@ def Shirts(request):
                 " SELECT home_vests.id, home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price, home_vests.Image FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Shirts'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':['Shirts.html', request.user.username]}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Shirts.html', vests)
     else:
         with connection.cursor() as cursor:
@@ -130,7 +130,7 @@ def Shirts(request):
                 " SELECT home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Shirts'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':'Shirts.html'}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Shirts.html', vests)
 def Ties(request):
     if request.user.is_authenticated:
@@ -139,7 +139,7 @@ def Ties(request):
                 " SELECT home_vests.id, home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price, home_vests.Image FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Ties'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':['Ties.html', request.user.username]}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Ties.html', vests)
     else:
         with connection.cursor() as cursor:
@@ -147,16 +147,16 @@ def Ties(request):
                 " SELECT home_vests.Name, home_vests.Price, home_vests.NumberBuy, home_vests.Sales, home_vests.New_Price FROM home_vests INNER JOIN home_category ON home_vests.CategoryID_id = home_category.id WHERE home_category.Name = 'Ties'"
             )
             vest = cursor.fetchall()
-        vests = {'vest' : vest, 'setToolbar':'Ties.html'}
+        vests = {'vest' : vest, 'setToolbar': request.user.username}
         return render(request, 'Ties.html', vests)
 def View(request, id):
     if request.user.is_authenticated:
         view = Vests.objects.filter(id = id)
-        vests = {'view' : view, 'setToolbar':['product_detail.html', request.user.username]}
+        vests = {'view' : view, 'setToolbar': request.user.username}
         return render(request, 'product_detail.html', vests)
     else:
         view = Vests.objects.filter(id = id)
-        vests = {'view' : view, 'setToolbar':'product_detail.html'}
+        vests = {'view' : view, 'setToolbar': request.user.username}
         return render(request, 'product_detail.html', vests)
 def about_us(request):
     return render(request, 'about_us.html')
@@ -227,5 +227,15 @@ def addCart(request, id):
             Quantity = CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id)[0].Quantity
             CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id).update(Quantity = Quantity + 1)
             return HttpResponse("Add to card successfully")
+        
     else:
         return HttpResponse("Login")
+def search(request, value):
+    if request.user.is_authenticated:
+        search = Vests.objects.filter(Name__contains = value)
+        vests = {'search' : search, 'setToolbar': request.user.username}
+        return render(request, 'search.html', vests)
+    else:
+        search = Vests.objects.filter(Name__contains = value)
+        vests = {'search' : search, 'setToolbar': request.user.username}
+        return render(request, 'search.html', vests)
