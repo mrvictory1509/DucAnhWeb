@@ -1,4 +1,4 @@
-from .models import Vests, Category, CartUser, BillUser, User
+from .models import Vests, Category, CartUser, BillUser, User, UserInformation
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.db import connection
@@ -163,19 +163,25 @@ def about_us(request):
     return render(request, 'about_us.html')
 def sign_in(request):
     return render(request, 'sign_in.html')
+def sign_upInterface(request):
+    return render(request, 'sign_up.html')
 def sign_up(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            auth_login(request, user)
-            return redirect('/home')
+        firstName = request.POST.get('firstName','')
+        lastName = request.POST.get('lastName','')
+        Username = request.POST.get('Username','')
+        email = request.POST.get('email','')
+        password = request.POST.get('password','')
+        DOB = request.POST.get('DOB','')
+        phoneNumber = request.POST.get('phoneNumber','')
+        height = request.POST.get('height','')
+        weight = request.POST.get('weight','')
+        Gender = request.POST.get('Gender','')
+        User.objects.create_user(password = password, username = Username, first_name = firstName, last_name = lastName, email = email, is_active = True,  is_superuser = False, is_staff = False)
+        UserInformation.objects.create(UserID_id = User.objects.latest('id').id, Phone = phoneNumber, Height = height, Weight = weight, DOB = DOB, Gender = Gender)
+        return redirect('/sign_in')
     else:
-        form = SignUpForm()
-    return render(request, 'sign_up.html', {'form': form})
+        return redirect('/sign_in')
 def Cart(request):
     if request.user.is_authenticated:
         with connection.cursor() as cursor:

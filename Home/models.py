@@ -28,4 +28,10 @@ class BillUser(models.Model):
     UserID = models.ForeignKey(User, default=None, on_delete=models.CASCADE, blank=True, null = True)
     Image = models.ImageField()
     Ship = models.BooleanField(null= True, blank=True)
-
+class UserInformation(models.Model):
+    UserID = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
+    Phone = models.IntegerField(blank=True, null = True)
+    Height = models.IntegerField(blank=True, null = True)
+    Weight = models.IntegerField(blank=True, null = True)
+    DOB = models.DateTimeField()
+    Gender = models.CharField(max_length=40)
