@@ -8,66 +8,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/user.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Sign up</title>
 </head>
 
 <body>
     <div class="container">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" action="/sign_up" method="POST">
+            {% csrf_token %}
             <h2>Registration</h2>
             <div class="form-group">
                 <label for="firstName" class="col-sm-3 control-label">First Name</label>
-                <div class="col-sm-9">
-                    <input type="text" id="firstName" placeholder="First Name" class="form-control" autofocus>
+                <div class="col-12">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control" autofocus required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastName" class="col-sm-3 control-label">Last Name</label>
-                <div class="col-sm-9">
-                    <input type="text" id="lastName" placeholder="Last Name" class="form-control" autofocus>
+                <div class="col-12">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="form-control" autofocus required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Username* </label>
+                <div class="col-12">
+                    <input type="text" id="email" placeholder="" class="form-control" name="Username" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-sm-3 control-label">Email* </label>
-                <div class="col-sm-9">
-                    <input type="email" id="email" placeholder="Email" class="form-control" name="email">
+                <div class="col-12">
+                    <input type="email" id="email" placeholder="Email" class="form-control" name="email" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Password*</label>
-                <div class="col-sm-9">
-                    <input type="password" id="password" placeholder="Password" class="form-control">
+                <div class="col-12">
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-control" required onkeydown="validatePassword()">
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Confirm Password*</label>
-                <div class="col-sm-9">
-                    <input type="password" id="password" placeholder="Password" class="form-control">
+                <div class="col-12">
+                    <input type="password" id="cfPassword" placeholder="Password" class="form-control" required onkeydown="validatePassword()">
                 </div>
+                <p style="display: none; color: red;" id="validatePassword">Your password doesn't match</p>
             </div>
             <div class="form-group">
                 <label for="birthDate" class="col-sm-3 control-label">Date of Birth*</label>
-                <div class="col-sm-9">
-                    <input type="date" id="birthDate" class="form-control">
+                <div class="col-12">
+                    <input type="date" id="birthDate" class="form-control" name="DOB" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>
-                <div class="col-sm-9">
-                    <input type="phoneNumber" id="phoneNumber" placeholder="Phone number" class="form-control">
+                <div class="col-12">
+                    <input type="phoneNumber" id="phoneNumber" placeholder="Phone number" class="form-control" name="phoneNumber" required>
                     <span class="help-block">Your phone number won't be disclosed anywhere </span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="Height" class="col-sm-3 control-label">Height* </label>
-                <div class="col-sm-9">
-                    <input type="number" id="height" placeholder="Please write your height in centimetres" class="form-control">
+                <div class="col-12">
+                    <input type="number" id="height" placeholder="Please write your height in centimetres" class="form-control" name="height" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="weight" class="col-sm-3 control-label">Weight* </label>
-                <div class="col-sm-9">
-                    <input type="number" id="weight" placeholder="Please write your weight in kilograms" class="form-control">
+                <div class="col-12">
+                    <input type="number" id="weight" placeholder="Please write your weight in kilograms" class="form-control" name="weight" required>
                 </div>
             </div>
             <div class="form-group">
@@ -76,12 +85,12 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <label class="radio-inline">
-                                <input type="radio" id="femaleRadio" value="Female">Female
+                                <input type="radio" id="femaleRadio" value="Female" name="Gender" required>Female
                             </label>
                         </div>
                         <div class="col-sm-3">
                             <label class="radio-inline">
-                                <input type="radio" id="maleRadio" value="Male">Male
+                                <input type="radio" id="maleRadio" value="Male" name="Gender" required>Male
                             </label>
                         </div>
                     </div>
@@ -93,7 +102,7 @@
                     <span class="help-block">*Required fields</span>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="button" class="btn btn-primary btn-block" id="Register">Register</button>
         </form>
         <!-- /form -->
     </div>
@@ -101,5 +110,18 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
-
+<script>
+    function validatePassword(){
+        if($('#password').val() == $('#cfPassword').val())
+        {
+            $('#validatePassword').show();
+            document.getElementById('Register').type = "button"
+        }
+        if($('#password').val() != $('#cfPassword').val())
+        {
+            $('#validatePassword').hide();
+            document.getElementById('Register').type = "submit"
+        }
+    }
+</script>
 </html>

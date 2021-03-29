@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Sales</title>
 </head>
@@ -15,28 +15,28 @@
     {% include "horizontal_toolbar.html" %}
     <div id="main">
         {% include "vertical_toolbar.html" %}
-            <div class="maincontent">
-                <div>
-                    <h1 class="text">Nike & Jordan shoe world!</h1>
-                    <div class="card-list">
-                        {% for i in trend %}
-                        <div class="card margin">
-                            <div class="card__thumbnail image">
-                                <img src="/media/{{i.Image}}"alt="">
-                            </div>
-                            <div class="card__info">
-                                <span class="name">{{i.Name}}</span>
-                                <span class="email" style="color:#e70d3c;">{{i.Price}} $</span>
-                            </div>
-                            <div class="card__btn">
+        <div class="maincontent">
+            <div>
+                <h1 class="text">Nike & Jordan shoe world!</h1>
+                <div class="card-list">
+                    {% for i in trend %}
+                    <div class="card margin">
+                        <div class="card__thumbnail image">
+                            <img src="/media/{{i.Image}}" alt="">
+                        </div>
+                        <div class="card__info">
+                            <span class="name">{{i.Name}}</span>
+                            <span class="email" style="color:#e70d3c;">{{i.Price}} $</span>
+                        </div>
+                        <div class="card__btn">
                             <a href="/View/{{i.id}}" class="btn btn__view">
                                 <span class="btn__icon"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 <span class="btn__name">View</span>
                             </a>
-                            <img style="float: right;width: 35px; height: 35px; cursor: pointer;" src="{% static 'image/cart.png' %}" alt="" onclick= "cart('{{i.id}}')">
+                            <img style="float: right;width: 35px; height: 35px; cursor: pointer;" src="{% static 'image/cart.png' %}" alt="" onclick="cart('{{i.id}}')">
                         </div>
                     </div>
-                        {% endfor %}
+                    {% endfor %}
                 </div>
                 {% comment %}
                 <div class="card-list">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="card__info">
                                 <span class="name">{{i.Name}}</span>
-                                <span class="price">{{i.Price}} $</span>
+                                <span class="price">{{i.Price}} €</span>
                             </div>
                             <div class="card__btn">
                                 <a href="/detail.html" class="btn btn__view" style="text-decoration: none;">
@@ -76,4 +76,5 @@
 
 </html>
 <script src="{% static 'js/addCart.js' %}" type="text/javascript" charset="utf-8" async defer></script>
+
 </html>

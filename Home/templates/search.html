@@ -7,17 +7,17 @@
         </div>
         <div class="card__info">
             <span class="name">{{i.Name}}</span>
-            <span class="email">{{i.Price}} $</span>
+            <span class="email">{{i.Price}} €</span>
         </div>
 
         <div class="card__btn">
-        <a href="/View/{{i.id}}" class="btn btn__view">
-            <span class="btn__icon"><i class="fa fa-eye" aria-hidden="true"></i></span>
-            <span class="btn__name">View</span>
-        </a>
-                <img style="float: right;width: 35px; height: 35px; cursor: pointer;" src="{% static 'image/cart.png' %}" alt="" onclick="cart('{{i.id}}')">
+            <a href="/View/{{i.id}}" class="btn btn__view">
+                <span class="btn__icon"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                <span class="btn__name">View</span>
+            </a>
+            <img style="float: right;width: 35px; height: 35px; cursor: pointer;" src="{% static 'image/cart.png' %}" alt="" onclick="cart('{{i.id}}')">
         </div>
-    </div> 
-    {% endfor %}  
+    </div>
+    {% endfor %}
 </div>
 <script src="{% static 'js/addCart.js' %}" type="text/javascript" charset="utf-8" async defer></script>

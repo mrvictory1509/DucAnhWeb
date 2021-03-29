@@ -1,4 +1,4 @@
-from .models import Vests, Category, CartUser, BillUser, User
+from .models import Vests, Category, CartUser, BillUser, User, UserInformation
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.db import connection
@@ -28,6 +28,15 @@ def home(request):
         return render(request, 'home.html', vests)
     else:
         trend = Vests.objects.all().order_by(F('NumberBuy').desc())[:6]
+        vests = {'trend' : trend, 'setToolbar': request.user.username}
+        return render(request, 'home.html', vests)
+def Search(request, Name):
+    if request.user.is_authenticated:
+        trend = Vests.objects.filter(Name__contains = Name)
+        vests = {'trend' : trend, 'setToolbar': request.user.username}
+        return render(request, 'home.html', vests)
+    else:
+        trend = Vests.objects.filter(Name__contains = Name)
         vests = {'trend' : trend, 'setToolbar': request.user.username}
         return render(request, 'home.html', vests)
 def products(request):
@@ -163,24 +172,30 @@ def about_us(request):
     return render(request, 'about_us.html')
 def sign_in(request):
     return render(request, 'sign_in.html')
+def sign_upInterface(request):
+    return render(request, 'sign_up.html')
 def sign_up(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            auth_login(request, user)
-            return redirect('/home')
+        firstName = request.POST.get('firstName','')
+        lastName = request.POST.get('lastName','')
+        Username = request.POST.get('Username','')
+        email = request.POST.get('email','')
+        password = request.POST.get('password','')
+        DOB = request.POST.get('DOB','')
+        phoneNumber = request.POST.get('phoneNumber','')
+        height = request.POST.get('height','')
+        weight = request.POST.get('weight','')
+        Gender = request.POST.get('Gender','')
+        User.objects.create_user(password = password, username = Username, first_name = firstName, last_name = lastName, email = email, is_active = True,  is_superuser = False, is_staff = False)
+        UserInformation.objects.create(UserID_id = User.objects.latest('id').id, Phone = phoneNumber, Height = height, Weight = weight, DOB = DOB, Gender = Gender)
+        return redirect('/sign_in')
     else:
-        form = SignUpForm()
-    return render(request, 'sign_up.html', {'form': form})
+        return redirect('/sign_in')
 def Cart(request):
     if request.user.is_authenticated:
         with connection.cursor() as cursor:
             cursor.execute(
-                " SELECT home_vests.Name, home_vests.Image, home_vests.Price, home_cartuser.Quantity, home_cartuser.id FROM home_vests INNER JOIN home_cartuser ON home_vests.id = home_cartuser.UserID_id INNER JOIN auth_user ON auth_user.id = home_cartuser.UserID_id WHERE auth_user.id = '%s'",
+                "SELECT home_vests.Name, home_vests.Image, home_vests.Price, home_cartuser.Quantity, home_cartuser.id FROM home_vests INNER JOIN home_cartuser ON home_vests.id = home_cartuser.VestsID_id INNER JOIN auth_user ON auth_user.id = home_cartuser.UserID_id WHERE auth_user.id = '%s'",
                 [request.user.id]
             )
             viewCart = cursor.fetchall()
@@ -210,12 +225,11 @@ def addCart(request, id):
     if request.user.is_authenticated:
         if len(CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id)) == 0:
             CartUser.objects.create(UserID_id = request.user.id,VestsID_id = id, Quantity = 1)
-            return HttpResponse("Add to card successfully")
+            return HttpResponse("Add to Cart successfully")
         else:
             Quantity = CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id)[0].Quantity
             CartUser.objects.filter(UserID_id = request.user.id,VestsID_id = id).update(Quantity = Quantity + 1)
-            return HttpResponse("Add to card successfully")
-        print('aaaaaaaa')
+            return HttpResponse("Add to Cart successfully")
     else:
         return HttpResponse("Login")
 def setQuality(request, CartID, Quanlity):
@@ -241,6 +255,7 @@ def setBill(request):
         format, imgstr = bill.split(';base64,') 
         ext = format.split('/')[-1]
         data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+        CartUser.objects.filter(UserID_id = request.user.id).delete()
         BillUser.objects.create(UserID_id =request.user.id, Ship = False, Image = data)
         return redirect('/home')
     else:

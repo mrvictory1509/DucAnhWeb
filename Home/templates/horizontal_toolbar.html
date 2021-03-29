@@ -8,22 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Sales</title>
 </head>
 
 <body>
     <div class="wrapper">
         <div class="header">
             <img src="{% static 'image/logo vest.png' %}" alt="" style="height: 78px;">
-            <input type="text" name="search" id="Search" placeholder=" Search..." style="margin-left: 300px;">
-            {% if setToolbar != "" %}
+            <input type="text" name="search" id="Search" placeholder=" Search..." style="margin-left: 300px;"> {% if setToolbar != "" %}
             <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:30px" href="/logout">Logout</a>
-            <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px" href="/Cart">Cart</a>
-            {% endif %}
-            {% if setToolbar == "" %}
-            <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:30px" href="/sign_up">Sign up</a>
-            <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px" href="/sign_in">Sign in</a> 
-            {% endif %}
+            <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px" href="/Cart">Cart</a> {% endif %} {% if setToolbar == "" %}
+            <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:30px" href="/sign_upInterface">Sign up</a>
+            <a style="float: right; margin-left: 40px; margin-top:25px; margin-right:10px" href="/sign_in">Sign in</a> {% endif %}
         </div>
         <div class="clear"></div>
         <div class="banner">
@@ -33,22 +30,23 @@
         <div class="clear"></div>
         <div class="menu">
             <ul class="list_menu">
-                <li><a href="/home">Home(Top trending)</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="/products">Products</a> </li>
-                <li><a href="/sales">Sales</a> </li>  
+                <li><a href="/sales">Sales</a> </li>
                 <li><a href="/about_us">About us</a> </li>
                 <li><a href="/yourOrder">Your order</a> </li>
             </ul>
         </div>
         <div class="clear"></div>
-    </body>
-    </html>
+</body>
+
+</html>
 <script>
-    $(document).ready(function(){
-        $('#Search').keypress(function(e){
-            if(e.keyCode==13)
+    $(document).ready(function() {
+        $('#Search').keypress(function(e) {
+            if (e.keyCode == 13)
                 value = $('#Search').val();
-                location.href = "/Search/" + value;
+            location.href = "/Search/" + value;
         });
     });
 </script>
